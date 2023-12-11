@@ -1,5 +1,5 @@
 
-[![](https://img.shields.io/npm/dm/react-native-audiowaveform.svg?style=flat-square)](https://www.npmjs.com/package/react-native-audiowaveform)
+[![](https://img.shields.io/npm/dm/@alirehman7141/react-native-audiowaveform.svg?style=flat-square)](https://www.npmjs.com/package/@alirehman7141/react-native-audiowaveform)
 
 # react-native-audiowaveform
 
@@ -15,11 +15,11 @@ Regarding Android is ready with waveform's renderization and audio playback. Thu
 
 ## Getting started
 
-`$ npm install react-native-audiowaveform --save`
+`$ npm install @alirehman7141/react-native-audiowaveform --save`
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-audiowaveform`
+`$ react-native link @alirehman7141/react-native-audiowaveform`
 
 ### Manual installation
 
@@ -27,7 +27,7 @@ Regarding Android is ready with waveform's renderization and audio playback. Thu
 #### iOS
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-audiowaveform` and add `OGReactNativeWaveform.xcodeproj`
+2. Go to `node_modules` ➜ `@alirehman7141/react-native-audiowaveform` and add `OGReactNativeWaveform.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libOGReactNativeWaveform.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)<
 
@@ -43,7 +43,7 @@ Regarding Android is ready with waveform's renderization and audio playback. Thu
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
-      compile project(':react-native-audiowaveform')
+      implementation project(':react-native-audiowaveform')
   	```
 
 ## Usage
@@ -59,7 +59,7 @@ prop.waveFormStyle.scrubColor => Will set up color sscrubber
 
 
 ```javascript
-import WaveForm from 'react-native-audiowaveform';
+import WaveForm from '@alirehman7141/react-native-audiowaveform';
 
 <WaveForm 
     source={require('./path/to/your/file.mp3')}  
@@ -70,7 +70,7 @@ import WaveForm from 'react-native-audiowaveform';
   Also it is possible to get remote audio files:
  
 ```javascript
-import WaveForm from 'react-native-audiowaveform';
+import WaveForm from '@alirehman7141/react-native-audiowaveform';
 
 <WaveForm source={{uri:'https://url/path/to/the/file.mp3'}}  />
 
