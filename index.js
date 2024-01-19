@@ -4,83 +4,77 @@
  */
 
 "use strict";
-import React, { PureComponent } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { Platform, processColor, DeviceEventEmitter, requireNativeComponent } from "react-native";
-
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 
-type StateType = { componentID: string };
+const OGWaverformView = requireNativeComponent("OGWave", WaveForm);
 
-export default class WaveForm extends PureComponent<WaveObjectPropsType, StateType> {
-  constructor(props) {
-    super(props);
-    this._onPress = this._onPress.bind(this);
-    this._onFinishPlay = this._onFinishPlay.bind(this);
-  }
+const _makeid = () => {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  _makeid() {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (var i = 0; i < 5; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-    for (var i = 0; i < 5; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-  }
-
-  _onPress(e) {
-    const event = Platform.OS === "ios" ? e.nativeEvent : e;
-    if (event.componentID === this.state.componentID && this.props.onPress) {
-      this.props.onPress(event);
-    }
-  }
-
-  _onFinishPlay(e) {
-    const event = Platform.OS === "ios" ? e.nativeEvent : e;
-    if (event.componentID === this.state.componentID && this.props.onFinishPlay) {
-      this.props.onFinishPlay(event);
-    }
-  }
-
-  componentWillMount() {
-    DeviceEventEmitter.addListener("OGOnPress", this._onPress);
-    DeviceEventEmitter.addListener("OGFinishPlay", this._onFinishPlay);
-    const componentID = this._makeid();
-    this.setState({ componentID });
-  }
-
-  render() {
-    const { source } = this.props;
-    const { componentID } = this.state;
-    const assetResoved = resolveAssetSource(source) || {};
-
-    let uri = assetResoved.uri;
-    if (uri && uri.match(/^\//)) {
-      uri = `file://${uri}`;
-    }
-
-    const isNetwork = !!(uri && uri.match(/^https?:/));
-    const isAsset = !!(uri && uri.match(/^(assets-library|file|content|ms-appx|ms-appdata):/));
-
-    const nativeProps = {
-      ...this.props,
-      waveFormStyle: {
-        ogWaveColor: processColor(this.props.waveFormStyle.waveColor),
-        ogScrubColor: processColor(this.props.waveFormStyle.scrubColor)
-      },
-
-      src: {
-        uri,
-        isNetwork,
-        isAsset,
-        type: source.type,
-        mainVer: source.mainVer || 0,
-        patchVer: source.patchVer || 0
-      },
-      componentID
-    };
-
-    return <OGWaverformView {...nativeProps} onPress={this._onPress} onFinishPlay={this._onFinishPlay} />;
-  }
+  return text;
 }
 
-const OGWaverformView = requireNativeComponent("OGWave", WaveForm);
+const WaveForm = (props: WaveObjectPropsType) => {
+  const { source, onPress, waveFormStyle, onFinishPlay } = props;
+  const [componentID, setComponentID] = useState(_makeid());
+
+  const _onPress = (e) => {
+    const event = Platform.OS === "ios" ? e.nativeEvent : e;
+    if (event.componentID === componentID && onPress) {
+      onPress(event);
+    }
+  }
+
+  const _onFinishPlay = useCallback(
+      (e) => {
+        const event = Platform.OS === "ios" ? e.nativeEvent : e;
+        if (event.componentID === componentID && onFinishPlay) {
+          onFinishPlay(event);
+        }
+      },
+      [componentID, onFinishPlay]
+  );
+
+  useEffect(() => {
+    DeviceEventEmitter.addListener("OGOnPress", _onPress);
+    DeviceEventEmitter.addListener("OGFinishPlay", _onFinishPlay);
+  }, []);
+
+  const assetResoved = resolveAssetSource(source) || {};
+
+  let uri = assetResoved.uri;
+  if (uri && uri.match(/^\//)) {
+    uri = `file://${uri}`;
+  }
+
+  const isNetwork = !!(uri && uri.match(/^https?:/));
+  const isAsset = !!(uri && uri.match(/^(assets-library|file|content|ms-appx|ms-appdata):/));
+
+  const nativeProps = {
+    ...props,
+    waveFormStyle: {
+      ogWaveColor: processColor(waveFormStyle.waveColor),
+      ogScrubColor: processColor(waveFormStyle.scrubColor)
+    },
+
+    src: {
+      uri,
+      isNetwork,
+      isAsset,
+      type: source.type,
+      mainVer: source.mainVer || 0,
+      patchVer: source.patchVer || 0
+    },
+    componentID
+  };
+
+  return <OGWaverformView {...nativeProps} onPress={_onPress} onFinishPlay={_onFinishPlay} />
+}
+
+export default WaveForm;
+

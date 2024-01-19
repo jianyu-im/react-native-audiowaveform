@@ -1,53 +1,48 @@
 {
-  "author": "AliRehman7141 2023",
   "bugs": {
-    "url": "https://github.com/AliRehman7141/react-native-audiowaveform/issues"
+    "url": "https://github.com/Bigpawn/react-native-audiowaveform/issues"
   },
   "dependencies": {},
   "description": "Audio Waveform visualization and sound renderization for React Native",
   "devDependencies": {
-    "babel-preset-react-native-stage-0": "^1.0.1",
-    "jest": "^23.5.0",
-    "jest-react-native": "^18.0.0",
-    "react-test-renderer": "16.3.1",
-    "babel-jest": "22.0.4",
-    "babel-plugin-styled-components": "1.5.0",
-    "babel-preset-react-native": "4.0.0",
-    "chalk": "2.3.2",
-    "deep-freeze": "0.0.1",
-    "dot-object": "1.7.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.0.0",
-    "enzyme-to-json": "^3.0.1",
-    "eslint": "^4.19.1",
-    "eslint-config-bambi": "1.3.0",
-    "fbemitter": "^2.1.1",
-    "flow-bin": "0.67.1",
-    "prettier": "^1.13.5",
-    "prop-types": "^15.6.0",
-    "react-dom": "^16.0.0-alpha.12",
-    "react-native-debugger-utils": "1.0.0"
+    "fbemitter": "^3.0.0",
+    "flow-bin": "^0.226.0",
+    "prettier": "^3.1.1",
+    "prop-types": "^15.8.1",
+    "react-dom": "^18.2.0",
+    "react": "^18.2.0",
+    "react-native": "^0.73.2"
   },
-  "homepage": "https://github.com/AliRehman7141/react-native-audiowaveform#readme",
+  "directories": {
+    "example": "example"
+  },
+  "dist": {
+    "shasum": "edffd87c688ba4e92955eadd527538f6ac7b282f",
+    "tarball": "https://registry.npmjs.org/react-native-audiowaveform/-/react-native-audiowaveform-1.0.471.tgz"
+  },
+  "homepage": "https://github.com/Bigpawn/react-native-audiowaveform#readme",
   "keywords": [
     "react-native",
     "audio",
     "waveform",
     "sound"
   ],
-  "license": "WTFPL",
+  "license": "MIT",
   "main": "index.js",
-  "name": "@alirehman7141/react-native-audiowaveform",
+  "maintainers": [
+    "otomogroove <info@otomogroove.com>"
+  ],
+  "name": "@dabing_bigpawn/react-native-audiowaveform",
+  "optionalDependencies": {},
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "react-native": "^0.73.2"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AliRehman7141/react-native-audiowaveform.git"
+    "url": "git+https://github.com/Bigpawn/react-native-audiowaveform.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "2.0.6"
+  "version": "2.0.5"
 }
